@@ -31,8 +31,8 @@ const Header = () => {
           onClick={() => setMenu(true)}
           onBlur={() => setMenu(false)}
         >
-          <Title>{user.name}</Title>
-          <ProfileImg src={user.imageUrl} alt={user.name} />
+          <Title>{user.givenName}</Title>
+          <ProfileImg src={user.imageUrl} alt={user.givenName} />
           {menu && (
             <Menu>
               <MenuItem onClick={() => signOut()}>Logout</MenuItem>

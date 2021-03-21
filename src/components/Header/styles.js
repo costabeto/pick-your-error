@@ -40,7 +40,7 @@ export const ProfileSection = styled.button`
     outline: none;
   }
   @media screen and (min-width: 768px) {
-    width: 250px;
+    width: 200px;
   }
 `;
 
@@ -58,17 +58,18 @@ export const Menu = styled.div`
   color: white;
   z-index: 10;
   @media screen and (min-width: 768px) {
-    width: 250px;
+    width: 200px;
   }
 `;
 
-export const MenuItem = styled.button`
+export const MenuItem = styled.div`
   width: 100px;
   height: 4rem;
   color: white;
   background-color: black;
   border: none;
   padding: 1rem;
+  font-size: 1rem;
   &:hover,
   &:active {
     background-color: rgba(54, 54, 54);
@@ -77,7 +78,7 @@ export const MenuItem = styled.button`
     outline: none;
   }
   @media screen and (min-width: 768px) {
-    width: 250px;
+    width: 200px;
   }
 `;
 
