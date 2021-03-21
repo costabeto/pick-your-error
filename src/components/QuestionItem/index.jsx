@@ -7,6 +7,9 @@ import {
   ProfileImg,
   ProfileLink,
   Username,
+  ExternalLinkButton,
+  ExternalLinkIcon,
+  HeaderLinkContainer,
 } from './styles';
 
 const QuestionItem = ({ data }) => {
@@ -19,6 +22,10 @@ const QuestionItem = ({ data }) => {
       score,
       answer_count,
       owner,
+      link,
+      tags,
+      view_count,
+      is_answered,
     } = data;
 
     const questionObject = {
@@ -33,6 +40,10 @@ const QuestionItem = ({ data }) => {
         link: owner.link,
         img: owner.profile_image,
       },
+      link,
+      tags: tags.join(' - '),
+      views: view_count,
+      is_answered,
     };
 
     return questionObject;
@@ -40,6 +51,11 @@ const QuestionItem = ({ data }) => {
 
   return (
     <Container>
+      <HeaderLinkContainer>
+        <ExternalLinkButton href={question.link} target='_blank'>
+          <ExternalLinkIcon />
+        </ExternalLinkButton>
+      </HeaderLinkContainer>
       <Item>
         <Label>Author</Label>
         <ProfileLink href={question.user.link}>
@@ -54,14 +70,6 @@ const QuestionItem = ({ data }) => {
         <Value>{question.title}</Value>
       </Item>
       <Item>
-        <Label>Created</Label>
-        <Value>{question.created}</Value>
-      </Item>
-      <Item>
-        <Label>Last Activity</Label>
-        <Value>{question.last_activity}</Value>
-      </Item>
-      <Item>
         <Label>Score</Label>
         <Value>{question.score}</Value>
       </Item>
@@ -70,9 +78,23 @@ const QuestionItem = ({ data }) => {
         <Value>{question.answer_count}</Value>
       </Item>
       <Item>
-        <Label>Licence</Label>
-        <Value>{question.license}</Value>
+        <Label>Views</Label>
+        <Value>{question.views}</Value>
       </Item>
+      <Item>
+        <Label>Created</Label>
+        <Value>{question.created}</Value>
+      </Item>
+      <Item>
+        <Label>Last Activity</Label>
+        <Value>{question.last_activity}</Value>
+      </Item>
+      {question.tags && (
+        <Item>
+          <Label>Tags</Label>
+          <Value>{question.tags}</Value>
+        </Item>
+      )}
     </Container>
   );
 };

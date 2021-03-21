@@ -3,6 +3,8 @@ import { Route as ReactDOMRoute, Redirect } from 'react-router-dom';
 
 import { useAuth } from '../hooks/auth';
 
+import Header from '../components/Header';
+
 const Route = ({ isPrivate = false, component: Component, ...rest }) => {
   const { user } = useAuth();
 
@@ -11,7 +13,14 @@ const Route = ({ isPrivate = false, component: Component, ...rest }) => {
       {...rest}
       render={({ location }) => {
         return isPrivate === !!user ? (
-          <Component />
+          isPrivate ? (
+            <>
+              <Header />
+              <Component />
+            </>
+          ) : (
+            <Component />
+          )
         ) : (
           <Redirect
             to={{

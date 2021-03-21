@@ -16,7 +16,7 @@ const Home = () => {
       page: 1,
       pagesize: 100,
       order: 'desc',
-      sort: 'activity',
+      sort: 'votes',
     };
 
     stackApi

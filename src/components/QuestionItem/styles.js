@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FiExternalLink, FiCheck } from 'react-icons/fi';
 
 export const Container = styled.div`
   width: 100%;
@@ -57,4 +58,34 @@ export const Username = styled.div`
   font-size: 1.3rem;
   font-weight: 600;
   margin-top: 0.2rem;
+`;
+
+export const HeaderLinkContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  max-width: 700px;
+`;
+
+export const ExternalLinkIcon = styled(FiExternalLink)`
+  font-size: 1.5rem;
+`;
+
+export const ExternalLinkButton = styled.a`
+  background-color: transparent;
+  border: none;
+  padding: 0px 2rem;
+  color: black;
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const CheckIcon = styled(FiCheck)`
+  font-size: 1.5rem;
+  color: green;
+  margin-left: 2rem;
 `;
