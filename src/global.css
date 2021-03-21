@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  width: 100vw;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
