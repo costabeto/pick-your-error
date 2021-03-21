@@ -6,6 +6,7 @@ const Input = ({
   type = 'text',
   onChange = () => {},
   style,
+  onEnter = () => {},
 }) => {
   const [value, setValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
@@ -25,6 +26,7 @@ const Input = ({
         onChange={(e) => handleOnChange(e)}
         onFocus={(e) => setIsFocused(e)}
         onBlur={() => setIsFocused(false)}
+        onKeyPress={(e) => e.key === 'Enter' && onEnter(e)}
         value={value}
       />
     </Container>

@@ -20,6 +20,7 @@ export const Container = styled.button`
   align-items: center;
   justify-content: space-between;
   min-height: 3rem;
+  height: 64px;
   margin: 0;
   padding: calc(0.875rem - 3px) 63px calc(0.875rem - 3px) 15px;
   text-align: left;

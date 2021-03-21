@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
-import api from '../services/api';
+// import api from '../services/api';
 
 const AuthContext = createContext({});
 
@@ -9,7 +9,7 @@ const AuthProvider = ({ children }) => {
     const token = sessionStorage.getItem('@pye:token');
 
     if (token && user) {
-      api.defaults.headers.authorization = `Bearer ${token}`;
+      // api.defaults.headers.authorization = `Bearer ${token}`;
 
       return { token, user: JSON.parse(user) };
     }
@@ -32,7 +32,7 @@ const AuthProvider = ({ children }) => {
     sessionStorage.setItem('@pye:token', token);
     sessionStorage.setItem('@pye:user', JSON.stringify(user));
 
-    api.defaults.headers.authorization = `Bearer ${token}`;
+    // api.defaults.headers.authorization = `Bearer ${token}`;
 
     setData({ token, user });
   }, []);
