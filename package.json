@@ -6,6 +6,7 @@
     "@carbon/colors": "^10.22.0",
     "@carbon/icons-react": "^10.28.0",
     "@carbon/layout": "^10.21.0",
+    "@carbon/type": "^10.24.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
