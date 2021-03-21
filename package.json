@@ -2,6 +2,11 @@
   "name": "pick-your-error",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Roberto Costa",
+    "email": "roberto.araujo339@gmail.com",
+    "url": "https://betocosta.com.br/"
+  },
   "dependencies": {
     "@carbon/colors": "^10.22.0",
     "@carbon/icons-react": "^10.28.0",
