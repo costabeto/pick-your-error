@@ -4,6 +4,7 @@ import Route from './Route';
 
 import Login from '../pages/Login';
 import Home from '../pages/Home';
+import Favorites from '../pages/Favorites';
 
 const Router = () => {
   return (
@@ -11,6 +12,7 @@ const Router = () => {
       <Switch>
         <Route path='/login' component={Login} />
         <Route path='/' exact component={Home} isPrivate />
+        <Route path='/favorites' exact component={Favorites} isPrivate />
       </Switch>
     </BrowserRouter>
   );

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   Container,
   Item,
@@ -7,12 +7,15 @@ import {
   ProfileImg,
   ProfileLink,
   Username,
-  ExternalLinkButton,
+  ActionButton,
   ExternalLinkIcon,
+  FavoriteIcon,
   HeaderLinkContainer,
 } from './styles';
 
 const QuestionItem = ({ data }) => {
+  const [favorited, setFavorited] = useState(false);
+
   const question = useMemo(() => {
     const {
       title,
@@ -26,6 +29,7 @@ const QuestionItem = ({ data }) => {
       tags,
       view_count,
       is_answered,
+      question_id,
     } = data;
 
     const questionObject = {
@@ -44,17 +48,60 @@ const QuestionItem = ({ data }) => {
       tags: tags.join(' - '),
       views: view_count,
       is_answered,
+      question_id,
     };
+
+    const localFavorites = JSON.parse(localStorage.getItem('@pye:favorites'));
+
+    if (localFavorites) {
+      const isFavorited =
+        localFavorites.filter((f) => f.question_id === question_id).length ===
+        1;
+
+      if (isFavorited) {
+        setFavorited(true);
+      }
+    }
 
     return questionObject;
   }, [data]);
 
+  function handleFavorite() {
+    const localFavorites = JSON.parse(localStorage.getItem('@pye:favorites'));
+
+    if (!localFavorites) {
+      const newFavorites = [data];
+      localStorage.setItem('@pye:favorites', JSON.stringify(newFavorites));
+      setFavorited(true);
+    } else {
+      if (favorited) {
+        const newFavorites = localFavorites.filter(
+          (f) => f.question_id !== question.question_id
+        );
+
+        if (newFavorites.length === 0) {
+          localStorage.removeItem('@pye:favorites');
+        } else {
+          localStorage.setItem('@pye:favorites', JSON.stringify(newFavorites));
+        }
+        setFavorited(false);
+      } else {
+        const newFavorites = [...localFavorites, data];
+        localStorage.setItem('@pye:favorites', JSON.stringify(newFavorites));
+        setFavorited(true);
+      }
+    }
+  }
+
   return (
     <Container>
       <HeaderLinkContainer>
-        <ExternalLinkButton href={question.link} target='_blank'>
+        <ActionButton onClick={() => handleFavorite()}>
+          <FavoriteIcon favorited={favorited} />
+        </ActionButton>
+        <ActionButton onClick={() => window.open(question.link)}>
           <ExternalLinkIcon />
-        </ExternalLinkButton>
+        </ActionButton>
       </HeaderLinkContainer>
       <Item>
         <Label>Author</Label>

@@ -46,6 +46,7 @@ export const ProfileSection = styled.button`
 
 export const Menu = styled.div`
   width: 100px;
+  top: 4rem;
   right: 0px;
   height: fit-content;
   position: absolute;
@@ -53,7 +54,6 @@ export const Menu = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  transform: translateY(4rem);
   background-color: black;
   color: white;
   z-index: 10;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FiExternalLink, FiCheck } from 'react-icons/fi';
+import { FiExternalLink, FiHeart } from 'react-icons/fi';
 
 export const Container = styled.div`
   width: 100%;
@@ -68,24 +68,24 @@ export const HeaderLinkContainer = styled.div`
   align-items: center;
   position: absolute;
   max-width: 700px;
+  padding: 0px 2rem;
 `;
 
 export const ExternalLinkIcon = styled(FiExternalLink)`
   font-size: 1.5rem;
 `;
 
-export const ExternalLinkButton = styled.a`
+export const FavoriteIcon = styled(FiHeart)`
+  font-size: 1.5rem;
+  ${(props) => props.favorited && 'fill: crimson;color: crimson;'}
+`;
+
+export const ActionButton = styled.button`
   background-color: transparent;
   border: none;
-  padding: 0px 2rem;
   color: black;
+  margin: 0px 8px;
   &:focus {
     outline: none;
   }
-`;
-
-export const CheckIcon = styled(FiCheck)`
-  font-size: 1.5rem;
-  color: green;
-  margin-left: 2rem;
 `;

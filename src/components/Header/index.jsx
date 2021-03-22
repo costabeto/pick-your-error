@@ -11,10 +11,13 @@ import {
   MenuItem,
 } from './styles';
 import logo from '../../assets/img/logoWhiteTransparent.png';
+import { useHistory } from 'react-router';
 
 const Header = () => {
   const { user, signOut } = useAuth();
   const [menu, setMenu] = useState(false);
+
+  const history = useHistory();
 
   return (
     !!user && (
@@ -35,6 +38,10 @@ const Header = () => {
           <ProfileImg src={user.imageUrl} alt={user.givenName} />
           {menu && (
             <Menu>
+              <MenuItem onClick={() => history.push('/')}>Home</MenuItem>
+              <MenuItem onClick={() => history.push('/favorites')}>
+                Favorites
+              </MenuItem>
               <MenuItem onClick={() => signOut()}>Logout</MenuItem>
             </Menu>
           )}
