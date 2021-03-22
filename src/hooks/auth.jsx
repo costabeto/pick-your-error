@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
-// import api from '../services/api';
+import api from '../services/api';
 
 const AuthContext = createContext({});
 
@@ -9,7 +9,7 @@ const AuthProvider = ({ children }) => {
     const token = sessionStorage.getItem('@pye:token');
 
     if (token && user) {
-      // api.defaults.headers.authorization = `Bearer ${token}`;
+      api.defaults.headers.authorization = `Bearer ${token}`;
 
       return { token, user: JSON.parse(user) };
     }
@@ -24,35 +24,49 @@ const AuthProvider = ({ children }) => {
     setData({});
   }, []);
 
-  const signIn = useCallback(async ({ accessToken, profileObj }) => {
-    const token = accessToken;
+  const signIn = useCallback(async ({ email, password }) => {
+    api
+      .post('/auth/authenticate', { email, password })
+      .then((response) => {
+        if (response.status === 200) {
+          const { token, user } = response.data;
 
-    const user = profileObj;
-
-    sessionStorage.setItem('@pye:token', token);
-    sessionStorage.setItem('@pye:user', JSON.stringify(user));
-
-    // api.defaults.headers.authorization = `Bearer ${token}`;
-
-    setData({ token, user });
+          sessionStorage.setItem('@pye:token', token);
+          sessionStorage.setItem('@pye:user', JSON.stringify(user));
+          setData({ token, user });
+        } else {
+          throw new Error('Login failed, try again.');
+        }
+      })
+      .catch((err) => {
+        if (err.message.includes('400')) {
+          alert('Login failed, please try again with valid credentials');
+        }
+      });
   }, []);
 
-  const updateUser = useCallback(
-    (user) => {
-      sessionStorage.setItem('@pye:user', JSON.stringify(user));
+  const signUp = useCallback(async ({ email, password, name }) => {
+    api
+      .post('/auth/register', { email, password, name })
+      .then((response) => {
+        if (response.status === 200) {
+          const { token, user } = response.data;
 
-      setData({
-        token: data.token,
-        user,
+          sessionStorage.setItem('@pye:token', token);
+          sessionStorage.setItem('@pye:user', JSON.stringify(user));
+          setData({ token, user });
+        } else {
+          throw new Error('Error during registration, please try again');
+        }
+      })
+      .catch((err) => {
+        alert('Error during registration, please try again');
+        console.log(err);
       });
-    },
-    [setData, data.token]
-  );
+  }, []);
 
   return (
-    <AuthContext.Provider
-      value={{ user: data.user, signIn, signOut, updateUser }}
-    >
+    <AuthContext.Provider value={{ user: data.user, signIn, signOut, signUp }}>
       {children}
     </AuthContext.Provider>
   );

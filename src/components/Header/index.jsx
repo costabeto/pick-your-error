@@ -13,6 +13,8 @@ import {
 import logo from '../../assets/img/logoWhiteTransparent.png';
 import { useHistory } from 'react-router';
 
+import userImg from '../../assets/img/default-user-image.png';
+
 const Header = () => {
   const { user, signOut } = useAuth();
   const [menu, setMenu] = useState(false);
@@ -34,8 +36,8 @@ const Header = () => {
           onClick={() => setMenu(true)}
           onBlur={() => setMenu(false)}
         >
-          <Title>{user.givenName}</Title>
-          <ProfileImg src={user.imageUrl} alt={user.givenName} />
+          <Title>{user.name}</Title>
+          <ProfileImg src={user.imageUrl || userImg} alt={user.name} />
           {menu && (
             <Menu>
               <MenuItem onClick={() => history.push('/')}>Home</MenuItem>

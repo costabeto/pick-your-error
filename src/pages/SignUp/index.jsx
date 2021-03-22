@@ -5,8 +5,8 @@ import {
   FormComponent,
   Logo,
   Title,
-  SignupLink,
-  SignupText,
+  LoginLink,
+  LoginText,
   TryGoogle,
 } from './styles';
 import logo from '../../assets/img/logoWhiteTransparent.png';
@@ -19,13 +19,35 @@ import { useAuth } from '../../hooks/auth';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPasword] = useState('');
+  const [passwordConfirm, setPaswordConfirm] = useState('');
+  const [name, setName] = useState('');
 
-  const { signIn } = useAuth();
+  const { signUp } = useAuth();
 
   const responseGoogle = (response) => {
-    const { Ca, profileObj } = response;
-    signIn({ email: profileObj.email, password: Ca });
+    if (!!response) {
+      const { Ca, profileObj } = response;
+      signUp({
+        email: profileObj.email,
+        password: Ca,
+        name: profileObj.name,
+      });
+    }
   };
+
+  function handleSignUp() {
+    if (password !== passwordConfirm) {
+      alert(`Passwords must match, try again.`);
+    }
+
+    if (!email || !password || !name) {
+      alert('Please, fill in all fields to continue');
+    }
+
+    if (email && password && name && password === passwordConfirm) {
+      signUp({ email, password, name });
+    }
+  }
   return (
     <Container
       about='Designed by pch.vector : http://www.freepik.com'
@@ -34,11 +56,16 @@ const Login = () => {
       <Overlay>
         <FormComponent>
           <Logo src={logo} />
-          <Title>Log in to Pick Your Error</Title>
-          <SignupText>
-            Don't have an account yet?{'  '}
-            <SignupLink to='/signup'>Sign up</SignupLink>
-          </SignupText>
+          <Title>Sign up to Pick Your Error</Title>
+          <LoginText>
+            Already have an account?{'  '}
+            <LoginLink to='/login'>Try to login</LoginLink>
+          </LoginText>
+          <Input
+            type='text'
+            placeholder='Name'
+            onChange={(e) => setName(e.target.value)}
+          />
           <Input
             type='email'
             placeholder='E-mail'
@@ -49,16 +76,21 @@ const Login = () => {
             placeholder='Password'
             onChange={(e) => setPasword(e.target.value)}
           />
+          <Input
+            type='password'
+            placeholder='Password confirmation'
+            onChange={(e) => setPaswordConfirm(e.target.value)}
+          />
           <Button
             style={{ marginBottom: '10px' }}
-            onClick={() => signIn({ email, password })}
+            onClick={() => handleSignUp()}
           >
-            Login
+            Sign up
           </Button>
           <TryGoogle>Or just use your Google Account!</TryGoogle>
           <GoogleLogin
             clientId={process.env.REACT_APP_CLIENT_ID}
-            buttonText='Login with Google'
+            buttonText='Sign up with Google'
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
             cookiePolicy={'single_host_origin'}

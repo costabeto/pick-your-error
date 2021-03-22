@@ -47,7 +47,7 @@ export const Title = styled.div`
   margin: 1rem 0px;
 `;
 
-export const SignupText = styled.div`
+export const LoginText = styled.div`
   color: white;
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 400;
@@ -55,7 +55,7 @@ export const SignupText = styled.div`
   margin: 1rem 0px;
 `;
 
-export const SignupLink = styled(Link)`
+export const LoginLink = styled(Link)`
   color: white;
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 400;
