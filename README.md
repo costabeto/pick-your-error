@@ -2,6 +2,8 @@
 
 Have you gotten lot of errors?? Don't be stuck, Pick Your Error and the solution as well! In order to make your way to solving errors, use this application to browse along an incredible amount of solved problems, witch may have your included among them
 
+## Check the app on: https://pye.betocosta.com.br/
+
 ## Available Scripts
 
 In the project directory, you can run:
