@@ -23,8 +23,10 @@ const Login = () => {
   const { signIn } = useAuth();
 
   const responseGoogle = (response) => {
-    const { Ca, profileObj } = response;
-    signIn({ email: profileObj.email, password: Ca });
+    if (!!response && !response.error) {
+      const { profileObj } = response;
+      signIn({ email: profileObj.email, password: profileObj.googleId });
+    }
   };
   return (
     <Container

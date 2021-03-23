@@ -25,11 +25,12 @@ const Login = () => {
   const { signUp } = useAuth();
 
   const responseGoogle = (response) => {
-    if (!!response) {
-      const { Ca, profileObj } = response;
+    if (!!response && !response.error) {
+      console.log(response);
+      const { profileObj } = response;
       signUp({
         email: profileObj.email,
-        password: Ca,
+        password: profileObj.googleId,
         name: profileObj.name,
       });
     }
